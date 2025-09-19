@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manajemen Produk Toko</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #333;
+      color: #fff;
+    }
+    form {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+    form input {
+      padding: 8px;
+      flex: 1;
+    }
+    form button {
+      padding: 8px 15px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .hapus-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Manajemen Produk Toko</h1>
+
+  <!-- Form tambah produk -->
+  <form id="formTambah">
+    <input type="text" id="nama" placeholder="Nama produk" required>
+    <input type="number" id="harga" placeholder="Harga" required>
+    <input type="number" id="stok" placeholder="Stok" required>
+    <button type="submit">Tambah Produk</button>
+  </form>
+
+  <!-- Tabel daftar produk -->
+  <table id="tabelProduk">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama</th>
+        <th>Harga</th>
+        <th>Stok</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    let produkToko = [
+      { id: 1, nama: "Laptop", harga: 7000000, stok: 5 },
+      { id: 2, nama: "Mouse", harga: 200000, stok: 10 },
+      { id: 3, nama: "Keyboard", harga: 350000, stok: 7 }
+    ];
+
+    function tampilkanProduk() {
+      const tbody = document.querySelector("#tabelProduk tbody");
+      tbody.innerHTML = "";
+      produkToko.forEach(p => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${p.id}</td>
+          <td>${p.nama}</td>
+          <td>Rp${p.harga.toLocaleString()}</td>
+          <td>${p.stok}</td>
+          <td><button class="hapus-btn" onclick="hapusProduk(${p.id})">Hapus</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function tambahProduk(nama, harga, stok) {
+      const idBaru = produkToko.length > 0 ? produkToko[produkToko.length - 1].id + 1 : 1;
+      produkToko.push({ id: idBaru, nama, harga: Number(harga), stok: Number(stok) });
+      tampilkanProduk();
+    }
+
+    function hapusProduk(id) {
+      produkToko = produkToko.filter(p => p.id !== id);
+      tampilkanProduk();
+    }
+
+    document.getElementById("formTambah").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const harga = document.getElementById("harga").value;
+      const stok = document.getElementById("stok").value;
+      tambahProduk(nama, harga, stok);
+      this.reset();
+    });
+
+    // tampilkan produk saat pertama kali halaman dibuka
+    tampilkanProduk();
+  </script>
+
+</body>
+</html>
