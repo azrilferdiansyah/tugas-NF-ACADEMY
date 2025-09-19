@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Pegawai</title>
+  <style>
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+    thead {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tfoot {
+      background-color: #eee;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center">Tabel Data Pegawai</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Umur</th>
+        <th>Jabatan</th>
+        <th>Status</th>
+        <th>Gaji Pokok</th>
+        <th>Tunjangan Jabatan</th>
+        <th>BPJS</th>
+        <th>Tunjangan Keluarga</th>
+        <th>Total Gaji</th>
+      </tr>
+    </thead>
+
+    <tbody id="dataPegawai"></tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="8">Total Semua Gaji</td>
+        <td id="totalSemua"></td>
+      </tr>
+    </tfoot>
+  </table>
+
+<script>
+  // Data pegawai (bisa ditambah sesuai kebutuhan)
+  const pegawai = [
+    { nama: "Andi", umur: 30, jabatan: "Manajer", status: "Menikah" },
+    { nama: "Budi", umur: 25, jabatan: "Asisten Manajer", status: "Lajang" },
+    { nama: "Citra", umur: 22, jabatan: "Staff", status: "Menikah" }
+  ];
+
+  let totalSemuaGaji = 0;
+
+  // Fungsi hitung gaji pokok berdasarkan jabatan (if)
+  function hitungGajiPokok(jabatan) {
+    if (jabatan === "Manajer") return 15000000;
+    else if (jabatan === "Asisten Manajer") return 10000000;
+    else return 5000000; // staff
+  }
+
+  // Cetak data ke tabel
+  const tbody = document.getElementById("dataPegawai");
+
+  pegawai.forEach(p => {
+    const gapok = hitungGajiPokok(p.jabatan);
+    const tJabatan = 0.15 * gapok;
+    const bpjs = 0.10 * gapok;
+    const tKeluarga = (p.status === "Menikah") ? 0.20 * gapok : 0; // ternary operator
+    const total = gapok + tJabatan + bpjs + tKeluarga;
+
+    totalSemuaGaji += total;
+
+    const row = `<tr>
+      <td>${p.nama}</td>
+      <td>${p.umur}</td>
+      <td>${p.jabatan}</td>
+      <td>${p.status}</td>
+      <td>Rp${gapok.toLocaleString()}</td>
+      <td>Rp${tJabatan.toLocaleString()}</td>
+      <td>Rp${bpjs.toLocaleString()}</td>
+      <td>Rp${tKeluarga.toLocaleString()}</td>
+      <td>Rp${total.toLocaleString()}</td>
+    </tr>`;
+
+    tbody.innerHTML += row;
+  });
+
+  // Cetak total semua gaji ke tfoot
+  document.getElementById("totalSemua").innerText = "Rp" + totalSemuaGaji.toLocaleString();
+</script>
+
+</body>
+</html>
