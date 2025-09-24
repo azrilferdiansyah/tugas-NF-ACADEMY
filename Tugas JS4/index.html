@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Penyewaan Kendaraan</title>
+</head>
+<body>
+
+  <!-- Judul Halaman -->
+  <h1 style="text-align:center;">Sistem Penyewaan Kendaraan</h1>
+
+  <!-- ================== FORM PENYEWAAN ================== -->
+  <form id="rentalForm" style="margin-bottom:20px; text-align:center;">
+    <!-- Input Nama -->
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+
+    <!-- Input Nomor Telepon -->
+    <label for="telepon">Nomor Telepon:</label>
+    <input type="text" id="telepon" placeholder="Masukkan nomor telepon" required>
+
+    <!-- Pilihan Kendaraan -->
+    <label for="kendaraan">Kendaraan:</label>
+    <select id="kendaraan" required>
+      <option value="">-- Pilih Kendaraan --</option>
+      <option value="Mobil">Mobil</option>
+      <option value="Motor">Motor</option>
+      <option value="Sepeda">Sepeda</option>
+    </select>
+
+    <!-- Tombol Submit -->
+    <button type="submit">Sewa</button>
+  </form>
+
+  <!-- ================== TABEL PENYEWA AKTIF ================== -->
+  <h2>Sedang Menyewa</h2>
+  <table border="1" width="100%" id="tabelAktif">
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Telepon</th>
+        <th>Kendaraan</th>
+        <th>Status</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data penyewa aktif akan ditampilkan di sini melalui JavaScript -->
+    </tbody>
+  </table>
+
+  <!-- ================== TABEL RIWAYAT PENYEWAAN ================== -->
+  <h2>Riwayat Penyewaan</h2>
+  <table border="1" width="100%" id="tabelRiwayat">
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Telepon</th>
+        <th>Kendaraan</th>
+        <th>Tanggal Pinjam</th>
+        <th>Tanggal Kembali</th>
+        <th>Status</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Riwayat penyewaan akan ditampilkan di sini melalui JavaScript -->
+    </tbody>
+  </table>
+
+  <!-- ================== LOAD FILE JAVASCRIPT ================== -->
+  <script src="script.js"></script>
+
+</body>
+</html>
